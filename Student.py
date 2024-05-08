@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from tkinter import messagebox
 import mysql.connector
+import cv2
 
 class Student:
     def __init__(self,root):
@@ -244,7 +245,7 @@ class Student:
         btn_frame1 = Frame(student_info_frame,relief=RIDGE,bg="white")
         btn_frame1.place(x=6,y=250,width=602,height=35)
 
-        take_photo_btn = Button(btn_frame1,text="Take Photo",width=27,font="Nexa",bg="#50727B",fg="white")
+        take_photo_btn = Button(btn_frame1,text="Take Photo",command=self.generate_dataset,width=27,font="Nexa",bg="#50727B",fg="white")
         take_photo_btn.grid(row=0,column=2,padx=19)
 
         upload_photo_btn = Button(btn_frame1,text="Upload Photo",width=27,font="Nexa",bg="#50727B",fg="white")
@@ -499,6 +500,78 @@ class Student:
         self.var_address.set("")
         self.var_radio.set("")
         
+    #******** Generate data set or take photo sample*********
+    def generate_dataset(self):
+        if self.var_department.get() == "Select Department" or self.var_name.get() == "" or self.var_id.get() == "":
+            messagebox.showerror("Error","Check all the required fields",parent = self.root)
+        else:
+            try:
+                conn = mysql.connector.connect(host="localhost",username="root",password="2684",database="I-detectface")
+                my_cursor = conn.cursor()
+                my_cursor.execute("Select * from student")
+                myresult = my_cursor.fetchall()
+                id = 0
+                for x in myresult:
+                    id+=1
+                my_cursor.execute("Update student set Roll=%s,Name=%s,Department=%s,Course=%s,Semester=%s,Sassion=%s,Section=%s,Gender=%s,Birth_Date=%s,Phone_number=%s,Email=%s,Blood_Group=%s,Teacher=%s,Address=%s,Photo=%s where ID=%s",(
+                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                            self.var_roll.get(),
+                                                                                                                                                                                                                            self.var_name.get(),
+                                                                                                                                                                                                                            self.var_department.get(),
+                                                                                                                                                                                                                            self.var_course.get(),
+                                                                                                                                                                                                                            self.var_semester.get(),
+                                                                                                                                                                                                                            self.var_sassion.get(),
+                                                                                                                                                                                                                            self.var_section.get(),
+                                                                                                                                                                                                                            self.var_gender.get(),
+                                                                                                                                                                                                                            self.var_birth_date.get(),
+                                                                                                                                                                                                                            self.var_phone_no.get(),
+                                                                                                                                                                                                                            self.var_email.get(),
+                                                                                                                                                                                                                            self.var_blood_group.get(),
+                                                                                                                                                                                                                            self.var_teacher.get(),
+                                                                                                                                                                                                                            self.var_address.get(),
+                                                                                                                                                                                                                            self.var_radio.get(),
+                                                                                                                                                                                                                            self.var_id.get() == id+1
+                                                                                                                                                                                                                        ))
+                conn.commit()
+                self.fetch_data()
+                self.reset_data()
+                conn.close()
+
+                #**********Load predifined data on face frontals from opneCV*********
+
+                face_classifier = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+
+                def face_cropped(img):
+                    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+                    faces = face_classifier.detectMultiScale(gray,1.3,5)
+                    
+                    #scaling factor = 1.3
+                    #minimum neigbor = 5
+
+                    for (x,y,w,h) in faces:
+                        face_cropped = img[y:y+h,x:x+w]
+                        return face_cropped
+                    
+                cap = cv2.VideoCapture(0)
+                img_id = 0
+                while True:
+                    ret,my_frame = cap.read()
+                    if face_cropped(my_frame) is not None:
+                        img_id+=1
+                        face = cv2.resize(face_cropped(my_frame),(450,450))
+                        face = cv2.cvtColor(face,cv2.COLOR_BGR2GRAY)
+                        file_name_path = "data/user."+str(id)+"."+str(img_id)+".jpg"
+                        cv2.imwrite(file_name_path,face)
+                        cv2.putText(face,str(img_id),(50,50),cv2.FONT_HERSHEY_COMPLEX,2,(0,255,0),2)
+                        cv2.imshow("Cropped Face", face)
+
+                    if cv2.waitKey(1) == 13 or int(img_id) == 100:
+                        break
+                cap.release()
+                cv2.destroyAllWindows()
+                messagebox.showinfo("Result", "Generating data set completed!")
+            except Exception as es:
+                    messagebox.showerror("Error",f"Due to :{str(es)}",parent = self.root)
 
 
 
