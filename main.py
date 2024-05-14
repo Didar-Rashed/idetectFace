@@ -1,6 +1,6 @@
 from tkinter import*
 from tkinter import ttk 
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 from Student import Student
 
 class Face_recognization_System:
@@ -10,28 +10,28 @@ class Face_recognization_System:
         self.root.title("Face Recognation System")
 
         # Zeroth Image
-        img = Image.open(r"D:\IdetectFace\images\img.jpg")
+        img = Image.open(r"D:\IdetectFace\images\img1.jpg")
         img = img.resize((500,130))
         self.photoimg = ImageTk.PhotoImage(img)
 
         f_lbl = Label(self.root,image=self.photoimg)
-        f_lbl.place(x=-30,y=0,width=500,height=130)
+        f_lbl.place(x=-40,y=0,width=500,height=130)
 
         # First Image
-        img1 = Image.open(r"D:\IdetectFace\images\img1.jpg")
+        img1 = Image.open(r"D:\IdetectFace\images\img1.1.jpg")
         img1 = img1.resize((500,130))
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
         f_lbl = Label(self.root,image=self.photoimg1)
-        f_lbl.place(x=470,y=0,width=500,height=130)
+        f_lbl.place(x=450,y=0,width=500,height=130)
 
         # Second Image
-        img2 = Image.open(r"D:\IdetectFace\images\img2.jpg")
+        img2 = Image.open(r"D:\IdetectFace\images\img.jpg")
         img2 = img2.resize((500,130))
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
         f_lbl = Label(self.root,image=self.photoimg2)
-        f_lbl.place(x=970,y=0,width=500,height=130)
+        f_lbl.place(x=910,y=0,width=500,height=130)
 
         # Background Image
         img3 = Image.open(r"D:\IdetectFace\images\img-bg.jpg")
@@ -52,10 +52,10 @@ class Face_recognization_System:
         img4 = img4.resize((120,120))
         self.photoimg4 = ImageTk.PhotoImage(img4)
 
-        b1 = Button(bg_img,image=self.photoimg4,command=self.student_details,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg4,command=self.student_details,cursor="hand2",  bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")
         b1.place(x=250,y=100,width=120,height=120)
 
-        b_1 = Button(bg_img,text="Student Details",command=self.student_details,cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
+        b_1 = Button(bg_img,text="Student Details",command=self.student_details,cursor="hand2",font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")
         b_1.place(x=250,y=200,width=120,height=25)
 
         # Face Detector Button
@@ -63,10 +63,10 @@ class Face_recognization_System:
         img5 = img5.resize((130,160))
         self.photoimg5 = ImageTk.PhotoImage(img5)
 
-        b1 = Button(bg_img,image=self.photoimg5,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg5,cursor="hand2",  bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")
         b1.place(x=550,y=100,width=120,height=120)
 
-        b_1 = Button(bg_img,text="Face Detector",cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
+        b_1 = Button(bg_img,text="Face Detector",cursor="hand2",font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")
         b_1.place(x=550,y=200,width=120,height=25)
 
         # Attendance Button
@@ -74,10 +74,10 @@ class Face_recognization_System:
         img6 = img6.resize((120,120))
         self.photoimg6 = ImageTk.PhotoImage(img6)
 
-        b1 = Button(bg_img,image=self.photoimg6,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg6,cursor="hand2", bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")
         b1.place(x=850,y=100,width=120,height=120)
 
-        b_1 = Button(bg_img,text="Attendance",cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
+        b_1 = Button(bg_img,text="Attendance",cursor="hand2",font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")
         b_1.place(x=850,y=200,width=120,height=25)
 
         # Help Desk Button
@@ -85,10 +85,10 @@ class Face_recognization_System:
         img7 = img7.resize((120,120))
         self.photoimg7 = ImageTk.PhotoImage(img7)
 
-        b1 = Button(bg_img,image=self.photoimg7,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg7,cursor="hand2", bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")
         b1.place(x=1150,y=100,width=120,height=120)
 
-        b_1 = Button(bg_img,text="Help Desk",cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
+        b_1 = Button(bg_img,text="Help Desk",cursor="hand2",font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")
         b_1.place(x=1150,y=200,width=120,height=25)
 
         # Train Button
@@ -96,10 +96,10 @@ class Face_recognization_System:
         img8 = img8.resize((120,120))
         self.photoimg8 = ImageTk.PhotoImage(img8)
 
-        b1 = Button(bg_img,image=self.photoimg8,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg8,cursor="hand2", bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")
         b1.place(x=250,y=320,width=120,height=120)
 
-        b_1 = Button(bg_img,text="Train Data",cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
+        b_1 = Button(bg_img,text="Train Data",cursor="hand2",font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")
         b_1.place(x=250,y=420,width=120,height=25)
 
         # Photos Button
@@ -107,10 +107,10 @@ class Face_recognization_System:
         img9 = img9.resize((120,120))
         self.photoimg9 = ImageTk.PhotoImage(img9)
 
-        b1 = Button(bg_img,image=self.photoimg9,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg9,cursor="hand2",bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")
         b1.place(x=550,y=320,width=120,height=120)
 
-        b_1 = Button(bg_img,text="Photos",cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
+        b_1 = Button(bg_img,text="Photos",cursor="hand2",font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")
         b_1.place(x=550,y=420,width=120,height=25)
 
         # Developer Button
@@ -118,23 +118,24 @@ class Face_recognization_System:
         img10 = img10.resize((120,120))
         self.photoimg10 = ImageTk.PhotoImage(img10)
 
-        b1 = Button(bg_img,image=self.photoimg10,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg10,cursor="hand2",bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")
         b1.place(x=850,y=320,width=120,height=120)
 
-        b_1 = Button(bg_img,text="Developer",cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
+        b_1 = Button(bg_img,text="Developer",cursor="hand2",font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")
         b_1.place(x=850,y=420,width=120,height=25)
 
         # Exit Button
+        
         img11 = Image.open(r"D:\IdetectFace\images\img11.jpg")
-        img11 = img11.resize((120,120))
+        img11 = img11.resize((120, 120))
         self.photoimg11 = ImageTk.PhotoImage(img11)
 
-        b1 = Button(bg_img,image=self.photoimg11,cursor="hand2")
-        b1.place(x=1150,y=320,width=120,height=120)
+        b1 = Button(bg_img, image=self.photoimg11, cursor="hand2", bg="#007bff", borderwidth=0, relief="flat", activebackground="#0056b3")  # Add an active background color for a subtle effect
+        b1.place(x=1150, y=320, width=120, height=120)
 
-        b_1 = Button(bg_img,text="Exit",cursor="hand2",font=("Nexa",10),bg="#121212",fg="white")
-        b_1.place(x=1150,y=420,width=120,height=25)
-
+        b_1 = Button(bg_img, text="Exit", cursor="hand2", font=("Helvetica", 10), bg="#dc3545", fg="white", borderwidth=0, relief="flat", activebackground="#c82333")  # Change the active background color for the second button
+        b_1.place(x=1150, y=420, width=120, height=25)
+        
     # ******* Fucntion Buttons********
 
     def student_details(self):
